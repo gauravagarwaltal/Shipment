@@ -1,4 +1,4 @@
-# Shipment-POC
+# Shipment-Payment Channel-POC
 
 ### Dependency Prerequisite
 
