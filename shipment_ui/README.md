@@ -19,14 +19,14 @@ Install [Node.js](https://nodejs.org/en/download/). Then,
 $ npm install -g ganache-cli
 ```
 
-Run Shipment Redis Server:
+### Develop
+Install requirements:
 ```
-PYTHONPATH=. python  Redis/RedisServer.py
+npm install
 ```
 
 Run Shipment UserInterface:
 ```
-cd ../shipment_ui
 npm start
 ```
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
