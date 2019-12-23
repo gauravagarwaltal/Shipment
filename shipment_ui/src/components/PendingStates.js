@@ -12,14 +12,6 @@ import 'react-toastify/dist/ReactToastify.css';
 async function onDeleteClick(sender, index, request_type) {
     let [status, response] = await DeleteRequest(sender, request_type, index)
     if (status === 200) {
-        toast.success('🦄 Wow so easy!', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-        });
         toast.success(request_type + "Delete Operation Done");
         console.log("hello ", response)
     }

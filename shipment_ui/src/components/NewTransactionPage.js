@@ -1,7 +1,7 @@
 import React from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { IsValidSignature, FetchOtherParty } from "../contract/contract_transaction";
+import { IsValidSignature, FetchOtherParty, GetChannelDetails } from "../contract/contract_transaction";
 import { FetchAccount } from "../contract/MetaMaskFetch";
 import OnChainStateView from "./OnChainStateView";
 import OffChainStateView from "./OffChainState";
@@ -26,16 +26,22 @@ class NewTransaction extends React.Component {
     componentDidMount() {
         FetchAccount().then(sender => {
             if (sender) {
-                this.setState({ 'sender': sender })
-                console.log(this.state.sender)
+
                 // let key = this.state.sender + 'active_channel_ids'
-                this.setState({ 'channelId': this.props.location.state.channelId })
-                this.setState({ 'action': this.props.location.state.action })
-                console.log(this.state.action, this.state.channelId)
-                if (this.state.action === 'Transaction') {
-                    let offChainState = FetchOffChainDetails(this.state.sender, this.state.channelId)
-                    this.setState({ 'offChainState': offChainState })
-                    this.setState({ 'formFlag': true })
+                if (this.props.location.state.action === 'Transaction') {
+                    GetChannelDetails(this.props.location.state.channelId).then(onChainState => {
+                        let offChainState = FetchOffChainDetails(sender, this.props.location.state.channelId)
+                        this.setState({
+                            'sender': sender,
+                            'channelId': this.props.location.state.channelId,
+                            'offChainState': offChainState,
+                            'onChainState': onChainState,
+                            'formFlag': true,
+                        })
+                    }).catch(err => {
+                        toast.error("on chain state issue")
+                        console.log(err)
+                    })
                 }
                 else {
                     this.props.history.push({

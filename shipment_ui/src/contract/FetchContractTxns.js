@@ -62,21 +62,6 @@ class FetchContractTxn extends React.Component {
                     if (index < 0) {
                         waiting_channels.push(channel_id)
                         localStorage.setItem(key, JSON.stringify(waiting_channels));
-                        key = this.state.sender + channel_id + '_last_signed_state'
-                        let value = localStorage.getItem(key)
-                        if (value == null) {
-                            let [onChainState, error] = await this.handle(GetChannelDetails(channel_id))
-                            if (error !== undefined) {
-                                toast.error(error)
-                                break
-                            }
-                            let count = 0
-                            let alice_cash = onChainState["Alice Cash"]
-                            let bob_cash = onChainState["Bob Cash"]
-                            value = channel_id + '_' + count + '_' + alice_cash + '_' + bob_cash + '_default_sign'
-                            localStorage.setItem(key, value)
-                            console.log(onChainState)
-                        }
                     }
                     console.log('EventInitializing', channel_id)
                     console.log("waiting channels ", waiting_channels)

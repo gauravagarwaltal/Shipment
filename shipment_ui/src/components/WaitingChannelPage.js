@@ -5,7 +5,7 @@ import { GetChannelDetails } from "../contract/contract_transaction";
 import { FetchAccount } from "../contract/MetaMaskFetch";
 import OnChainStateView from "./OnChainStateView";
 import OffChainStateView from "./OffChainState";
-import ActionList from "./ActionList";
+import { WaitingActionList } from "./ActionList";
 import { FetchOffChainDetails } from "../LocalStorage/local_storage_api";
 
 class WaitingChannelPage extends React.Component {
@@ -87,7 +87,7 @@ class WaitingChannelPage extends React.Component {
                         <OffChainStateView details={this.state.offChainState} />
                     </div>
                     <form id="form" onSubmit={this.actionHandler}>
-                        <ActionList onChange={this.onActionChange} />
+                        <WaitingActionList onChange={this.onActionChange} />
                         {this.state.errors && <div className="alert alert-danger">{this.state.errors}</div>}
                         <button id="button">Apply Action</button>
                     </form>

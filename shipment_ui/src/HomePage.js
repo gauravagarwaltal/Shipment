@@ -9,7 +9,7 @@ function HomePage() {
   return (
     <div className="jumbotron">
       <h1>Shipment Application</h1>
-      <p>React, Flux, and React Router for ultra-responsive web apps.</p>
+      <p>This is a payment channel proof of concept DApp.</p>
       <UserList users={UserAccounts} createNewChannel={CreateNewChannel} />
     </div>
   );

@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { GetChannelDetails } from "../contract/contract_transaction";
 import { FetchAccount } from "../contract/MetaMaskFetch";
-import ActionList from "./ActionList";
+import { ActiveActionList } from "./ActionList";
 import OnChainStateView from "./OnChainStateView";
 import OffChainStateView from "./OffChainState";
 import { FetchOffChainDetails } from "../LocalStorage/local_storage_api";
@@ -89,7 +89,7 @@ class ActiveChannelPage extends React.Component {
                         {this.state.offChainState && <OffChainStateView details={this.state.offChainState} />}
                     </div>
                     <form id="form" onSubmit={this.actionHandler}>
-                        <ActionList onChange={this.onActionChange} />
+                        <ActiveActionList onChange={this.onActionChange} />
                         {this.state.errors && <div className="alert alert-danger">{this.state.errors}</div>}
                         <button id="button">Apply Action</button>
                     </form>

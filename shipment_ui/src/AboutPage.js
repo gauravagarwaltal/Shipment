@@ -1,18 +1,26 @@
 import React from "react";
-import { CheckTimeOut } from "./Utils/TimeUtils";
-// import { GetReceipt } from "./contract/contract_transaction";
 
 class AboutPage extends React.Component {
 
-  componentDidMount() {
-    console.log(CheckTimeOut(1576143863))
-  }
+  // componentDidMount() {
+  // }
 
   render() {
     return (
       <>
-        <h2>About</h2>
-        <p>This app uses React.</p>
+        <h2>This is a payment channel proof of concept DApp.</h2>
+        <div>
+          <p>
+            <ul>
+              <li>Alice can establish open a duplex channel on-chain with Bob by using <b><i>Create Channel</i></b>.</li>
+              <li>Bob can join a channel established by Alice by using <b><i>Confirm Channel</i></b> (bob needs to act before timeout).</li>
+              <li>After channel confirmation, Alice and Bob can pay each other off chain.</li>
+              <li>Fund state is secured by smart contract.</li>
+              <li>In Case of conflict or withdrawal,  Users can <b><i>Close Channel</i></b> at any time.</li>
+              <li>In case of no coordination with the other party, after finalization period users can safely withdraw using <b><i>Finalize Close</i></b>.</li>
+            </ul>
+          </p>
+        </div>
 
       </>
     );
