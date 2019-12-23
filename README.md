@@ -36,6 +36,7 @@ PYTHONPATH=. python  Redis/RedisServer.py
 Run Shipment UserInterface:
 ```
 cd ../shipment_ui
+npm install
 npm start
 ```
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
