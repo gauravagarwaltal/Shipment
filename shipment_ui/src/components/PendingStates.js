@@ -10,10 +10,10 @@ import { MakeStringState } from "../LocalStorage/local_storage_api";
 import 'react-toastify/dist/ReactToastify.css';
 
 async function onDeleteClick(sender, index, request_type) {
+    // eslint-disable-next-line no-unused-vars
     let [status, response] = await DeleteRequest(sender, request_type, index)
     if (status === 200) {
         toast.success(request_type + "Delete Operation Done");
-        console.log("hello ", response)
     }
     else {
         toast.error(request_type + "Delete Operation Failed ");
@@ -46,10 +46,10 @@ async function onAcceptClick(sender, request, index, request_type) {
         localStorage.setItem(key, request);
         let lastState = MakeStringState(state_obj.channel_id, state_obj.count, state_obj.alice_cash, state_obj.bob_cash, signature)
 
+        // eslint-disable-next-line no-unused-vars
         let [status, response] = await SetRequest(TheOtherParty, request_type, lastState)
         if (status === 200) {
             toast.success("Transaction Accepted");
-            console.log("hello ", response)
             onDeleteClick(sender, index, STATE_TYPE.Request)
         }
         else {
@@ -102,10 +102,9 @@ class PendingStates extends React.Component {
                             if (request !== undefined && request !== null) {
                                 this.setState({ pendingStateRequests: request })
                             }
-                            console.log(this.state.pendingStateRequests)
                         })
                         .catch(err => {
-                            console.log(err)
+                            toast.error("check Redis connectivity")
                         })
                     FetchRequests(this.state.sender, STATE_TYPE.Response)
                         .then(response => {
@@ -114,7 +113,7 @@ class PendingStates extends React.Component {
                             }
                         })
                         .catch(err => {
-                            console.log(err)
+                            toast.error("check Redis connectivity")
                         })
                 }
 
@@ -124,7 +123,6 @@ class PendingStates extends React.Component {
                     pathname: '/metamaskIssue',
                 })
                 toast.error("check metamask connectivity")
-                console.log(err)
             })
     }
 

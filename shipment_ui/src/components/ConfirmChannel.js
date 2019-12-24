@@ -43,7 +43,6 @@ class ConfirmChannel extends React.Component {
                 pathname: '/metamaskIssue',
             })
             toast.error("check metamask connectivity")
-            console.log(err)
         })
     }
 

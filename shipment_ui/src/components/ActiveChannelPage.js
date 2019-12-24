@@ -33,7 +33,6 @@ class ActiveChannelPage extends React.Component {
                     })
                 }).catch(err => {
                     toast.error("On Chain State Not found")
-                    console.log(err)
                 })
             }
 
@@ -42,7 +41,6 @@ class ActiveChannelPage extends React.Component {
                 pathname: '/metamaskIssue',
             })
             toast.error("check metamask connectivity")
-            console.log(err)
         })
     }
 
@@ -58,7 +56,6 @@ class ActiveChannelPage extends React.Component {
         }
         else {
             this.setState({ 'errors': false });
-            console.log("this.state.action", this.state.action)
             if (this.state.action === 'select action' || this.state.action === '') {
                 this.setState({ 'errors': "Please select action from drop down" })
             }

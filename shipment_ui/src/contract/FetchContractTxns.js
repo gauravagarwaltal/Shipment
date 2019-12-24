@@ -71,7 +71,6 @@ class FetchContractTxn extends React.Component {
                 // REMOVE channel id from waiting list & add channel id in the active channel list
                 // Set state if not present in local storage
                 // triggered when channel confirmed by both parties.
-                // console.log(element.returnValues[0], element.returnValues[1], element.returnValues[2])
                 // event EventInitialized(uint channel_id, address addressAlice, address addressBob);
                 let channel_id = Number.parseInt(element.returnValues[0], 10)
                 let result = IsMyChannelStatic(element.returnValues[1], element.returnValues[2], this.state.sender)
@@ -159,8 +158,6 @@ class FetchContractTxn extends React.Component {
                 // one party use finalizeClose action after timeout happened
                 let channel_id = Number.parseInt(element.returnValues[0], 10)
                 let result = IsMyChannelStatic(element.returnValues[1], element.returnValues[2], this.state.sender)
-                console.log(result)
-                result = true
                 if (result) {
                     let key = this.state.sender + 'active_channel_ids'
                     let active_channel_ids = JSON.parse(localStorage.getItem(key) || "[]")

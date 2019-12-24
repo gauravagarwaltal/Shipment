@@ -33,7 +33,6 @@ class CloseChannel extends React.Component {
                         })
                     }).catch(err => {
                         toast.error("on chain state issue")
-                        console.log(err)
                     })
                 }
                 else {
@@ -47,7 +46,6 @@ class CloseChannel extends React.Component {
                 pathname: '/metamaskIssue',
             })
             toast.error("check metamask connectivity")
-            console.log(err)
         })
     }
 
@@ -63,14 +61,15 @@ class CloseChannel extends React.Component {
                 this.state.offChainState['sig'])
 
             let TheOtherParty = await FetchOtherParty(this.state.channelId, this.state.sender)
-            console.log(TheOtherParty)
             let sig_check = await IsValidSignature(TheOtherParty, this.state.channelId, parseInt(this.state.offChainState['count']), parseInt(this.state.offChainState['Alice Cash']),
                 parseInt(this.state.offChainState['Bob Cash']), this.state.offChainState['sig'])
-            console.log(sig_check)
             if (sig_check) {
                 console.log(this.state.offChainState['sig'])
                 await ChannelClose(this.state.channelId, parseInt(this.state.offChainState['count']), parseInt(this.state.offChainState['Alice Cash']),
                     parseInt(this.state.offChainState['Bob Cash']), this.state.offChainState['sig'], this.state.sender)
+            }
+            else {
+                toast.error("Off Chain State Signature broken")
             }
         }
     }

@@ -20,7 +20,6 @@ class DashBoardView extends React.Component {
             .then(sender => {
                 if (sender) {
                     this.setState({ 'sender': sender })
-                    console.log(this.state.sender)
                 }
 
             })
@@ -29,7 +28,6 @@ class DashBoardView extends React.Component {
                     pathname: '/metamaskIssue',
                 })
                 toast.error("check metamask connectivity")
-                console.log(err)
             })
     }
 
@@ -47,8 +45,6 @@ class DashBoardView extends React.Component {
         }
         else {
             let url = "/activeChannel/" + this.state.activeChannelId
-            console.log(url)
-            // console.log(this.props);
             this.props.history.push(url);
 
         }
@@ -68,8 +64,6 @@ class DashBoardView extends React.Component {
         }
         else {
             let url = "/waitingChannel/" + this.state.waitingChannelId
-            console.log(url)
-            // console.log(this.props);
             this.props.history.push(url);
         }
     }

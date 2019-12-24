@@ -14,35 +14,6 @@ class AddNewUser extends React.Component {
     componentDidMount() {
     }
 
-    actionHandler = async (event) => {
-        event.preventDefault();
-        if (this.state.sender === undefined || this.state.sender === null) {
-            this.props.history.push({
-                pathname: '/metamaskIssue',
-            })
-            toast.error("check metamask connectivity")
-        }
-        this.setState({ 'errors': false });
-        console.log("this.state.action", this.state.action)
-        if (this.state.action === 'select action' || this.state.action === '') {
-            this.setState({ 'errors': "Please select action from drop down" })
-        }
-        else {
-            let url = "/waitingChannel/" + this.state.waitingChannelId
-            console.log(url)
-            // console.log(this.props);
-            this.props.history.push(url);
-            this.props.history.push({
-                pathname: '/actionconfirmation',
-                search: '?query=' + this.state.channelId,
-                state: {
-                    channelId: this.state.channelId,
-                    action: this.state.action
-                }
-            })
-        }
-    }
-
     handleAddNewUser = async (event) => {
         event.preventDefault();
         this.setState({ 'errors': false })

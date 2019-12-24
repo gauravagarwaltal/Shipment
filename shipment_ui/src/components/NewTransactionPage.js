@@ -40,7 +40,6 @@ class NewTransaction extends React.Component {
                         })
                     }).catch(err => {
                         toast.error("on chain state issue")
-                        console.log(err)
                     })
                 }
                 else {
@@ -54,7 +53,6 @@ class NewTransaction extends React.Component {
                 pathname: '/metamaskIssue',
             })
             toast.error("check metamask connectivity")
-            console.log(err)
         })
     }
 
@@ -69,14 +67,11 @@ class NewTransaction extends React.Component {
             toast.error("check metamask connectivity")
         }
         this.setState({ 'errors': false });
-        console.log("this.state.action", this.state.action)
         if (this.state.action === 'select action' || this.state.action === '') {
             this.setState({ 'errors': "Please select action from drop down" })
         }
         else {
             let url = "/waitingChannel/" + this.state.waitingChannelId
-            console.log(url)
-            // console.log(this.props);
             this.props.history.push(url);
             this.props.history.push({
                 pathname: '/actionconfirmation',
@@ -102,17 +97,15 @@ class NewTransaction extends React.Component {
             let total_money = parseInt(this.state.offChainState['Alice Cash']) + parseInt(this.state.offChainState['Bob Cash'])
             if (total_money === (parseInt(this.state.aliceCash) + parseInt(this.state.bobCash))) {
                 let sig = await GenerateSignatures(this.state.channelId, parseInt(this.state.offChainState['count']) + 1, parseInt(this.state.aliceCash), parseInt(this.state.bobCash))
-                // console.log(sig)
-                // let sender = await FetchAccount()
                 await IsValidSignature(this.state.sender, this.state.channelId, parseInt(this.state.offChainState['count']) + 1, parseInt(this.state.aliceCash), parseInt(this.state.bobCash), sig)
 
                 // localStorage.setItem(sender + this.state.channelId + 'lastState', JSON.stringify(this.state.lastState));
                 let TheOtherParty = await FetchOtherParty(this.state.channelId, this.state.sender)
                 let stringifyState = MakeStringState(this.state.channelId, parseInt(this.state.offChainState['count']) + 1, this.state.aliceCash, this.state.bobCash, sig)
+                // eslint-disable-next-line no-unused-vars
                 let [status, response] = await SetRequest(TheOtherParty, STATE_TYPE.Request, stringifyState)
                 if (status === 200) {
                     toast.success("Transaction Success");
-                    console.log("hello ", response)
                 }
                 else {
                     toast.error("Transaction Failed ");
