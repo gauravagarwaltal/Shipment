@@ -5,7 +5,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fetch": "^1.1.0",
     "hiredis": "^0.5.0",
     "json-server": "^0.15.1",
